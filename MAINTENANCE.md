@@ -17,6 +17,6 @@ Fields: name, url, source_url, verticals, use_cases, pricing, pricing_checked, b
 Set `"sponsored": true` only for paying customers — it shows a "Sponsored" badge and sorts first. Sponsored placement slots on homepage/vertical pages are placeholders until sold.
 
 ## Placeholders to replace
-- `FORM` in build.py: `https://formspree.io/f/FORM_ID`
+- Newsletter form: controlled by the `FORM_ID` env var (Formspree form ID, currently `mjygpydo`), set in the build step `env:` of `.github/workflows/pages.yml`. If unset, the signup form is omitted and a `NEWSLETTER HOOK` comment marks its spot. Local build: `FORM_ID=mjygpydo BASE=... python3 build.py`.
 - `BASE` env var (default https://localproai.example)
 - Contact email d.bot@mail.grokbot.com (mailto links)
