@@ -4,7 +4,9 @@ import json, os, shutil, html, re
 from collections import defaultdict
 BASE = os.environ.get("BASE", "https://localproai.example").rstrip("/")
 PATH_PREFIX = os.environ.get("PATH_PREFIX", "").rstrip("/")  # e.g. /localai-directory for project Pages
-SITE = "LocalProAI"; EMAIL = "d.bot@mail.grokbot.com"; FORM = "https://formspree.io/f/FORM_ID"
+SITE = "LocalProAI"; EMAIL = "d.bot@mail.grokbot.com"; FORM_ID = os.environ.get("FORM_ID", "").strip()  # newsletter flag: off until a real Formspree ID is set
+FORM = f"https://formspree.io/f/{FORM_ID}"; SHOW_FORM = bool(FORM_ID) and FORM_ID != "FORM_ID"
+NEWS = f'''<section class="news"><h2>Get new AI tools for local businesses</h2><form action="{FORM}" method="POST"><input type="email" name="email" placeholder="you@business.com" required aria-label="Email"><button>Subscribe</button></form></section>''' if SHOW_FORM else "<!-- NEWSLETTER HOOK: set FORM_ID env var to enable signup -->"
 OUT = "docs"
 VERT = {"contractors": "Contractors & Trades", "realtors": "Realtors", "salons": "Salons & Beauty"}
 UC = {"quotes-estimates":"Quotes & Estimates","scheduling":"Scheduling & Booking","invoicing-payments":"Invoicing & Payments",
@@ -27,7 +29,7 @@ def write(path, title, desc, body, schema=None):
 <link rel="stylesheet" href="{link('/style.css')}">{sj}</head><body>
 <header><a class="logo" href="{link('/')}">{SITE}</a><nav>{''.join(f'<a href="{link("/"+k+"/")}">{v}</a>' for k,v in VERT.items())}<a href="{link('/use-cases/')}">Use cases</a><a href="{link('/advertise/')}">Advertise</a><a href="mailto:{EMAIL}?subject=Submit%20a%20tool">Submit a tool</a></nav></header>
 <main>{body}</main>
-<section class="news"><h2>Get new AI tools for local businesses</h2><form action="{FORM}" method="POST"><input type="email" name="email" placeholder="you@business.com" required aria-label="Email"><button>Subscribe</button></form></section>
+{NEWS}
 <footer>&copy; {SITE} &middot; Pricing as stated on vendor sites on the date shown; verify before buying. &middot; <a href="mailto:{EMAIL}?subject=Advertise">Advertise</a> &middot; <a href="mailto:{EMAIL}?subject=Submit%20a%20tool">Submit a tool</a></footer>
 </body></html>"""
     fp = os.path.join(OUT, path.strip("/"), "index.html") if path.endswith("/") else os.path.join(OUT, path.strip("/"))
@@ -47,7 +49,7 @@ open(os.path.join(OUT, ".nojekyll"), "w").close()
 opts = lambda d: "".join(f'<option value="{k}">{v}</option>' for k,v in d.items())
 write("/", f"{SITE} — AI Tools for Contractors, Realtors & Salons", f"A curated directory of {len(tools)} AI tools for local service businesses, with vendor-stated pricing and honest notes.",
  f'''<h1>AI tools for local service businesses</h1><p>{len(tools)} tools, hand-checked against vendor sites. No paid placements without a <span class="sp">Sponsored</span> label.</p>
-<div class="slot"><span class="sp">Sponsored</span> Homepage feature available — <a href="{link('/advertise/')}">advertise here</a>.</div>
+<!-- SPONSOR SLOT: homepage feature (add real sponsor here) --><p class="adv"><a href="mailto:{EMAIL}?subject=Sponsor%20{SITE}%20homepage">Advertise / sponsor this page</a></p>
 <div class="filters"><input id="q" placeholder="Search tools…" aria-label="Search"><select id="fv"><option value="">All verticals</option>{opts(VERT)}</select><select id="fu"><option value="">All use cases</option>{opts(UC)}</select></div>
 {grid(tools)}<script src="{link('/app.js')}"></script>''', itemlist("All AI tools", tools))
 # verticals, use cases, combos
@@ -56,7 +58,7 @@ for v, vn in VERT.items():
     combos = [(u, un) for u, un in UC.items() if len([t for t in ts if u in t["use_cases"]]) >= 3]
     cl = "".join(f'<li><a href="{link(f"/best/{v}/{u}/")}">Best AI {un.lower()} tools for {vn.lower()}</a></li>' for u, un in combos)
     write(f"/{v}/", f"AI Tools for {vn} ({len(ts)} picks) | {SITE}", f"{len(ts)} AI tools for {vn.lower()}: quoting, scheduling, phone answering, marketing and more, with pricing checked on vendor sites.",
-      f'<h1>AI tools for {vn}</h1><div class="slot"><span class="sp">Sponsored</span> Featured slot for {vn} — <a href="{link("/advertise/")}">$49/mo</a></div><h2>Best-of guides</h2><ul>{cl}</ul>{grid(ts)}', itemlist(f"AI tools for {vn}", ts))
+      f'<h1>AI tools for {vn}</h1><!-- SPONSOR SLOT: featured {vn} (add real sponsor here) --><p class="adv"><a href="mailto:{EMAIL}?subject=Sponsor%20{vn}%20page">Advertise / sponsor this page</a></p><h2>Best-of guides</h2><ul>{cl}</ul>{grid(ts)}', itemlist(f"AI tools for {vn}", ts))
     for u, un in combos:
         cs = [t for t in ts if u in t["use_cases"]]
         write(f"/best/{v}/{u}/", f"Best AI Tools for {vn} {un} ({len(cs)}) | {SITE}", f"The best AI {un.lower()} tools for {vn.lower()}: {', '.join(t['name'] for t in cs[:4])} and more, with pricing and honest notes.",
