@@ -23,6 +23,7 @@ jobs:
         env:
           BASE: https://jgonthego.github.io
           PATH_PREFIX: /localproai
+          FORM_ID: mjygpydo
       - uses: actions/configure-pages@v5
         with:
           enablement: true
