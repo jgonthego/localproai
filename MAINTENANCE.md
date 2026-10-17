@@ -20,3 +20,6 @@ Set `"sponsored": true` only for paying customers — it shows a "Sponsored" bad
 - Newsletter form: controlled by the `FORM_ID` env var (Formspree form ID, currently `mjygpydo`), set in the build step `env:` of `.github/workflows/pages.yml`. If unset, the signup form is omitted and a `NEWSLETTER HOOK` comment marks its spot. Local build: `FORM_ID=mjygpydo BASE=... python3 build.py`.
 - `BASE` env var (default https://localproai.example)
 - Contact email d.bot@mail.grokbot.com (mailto links)
+
+## Design
+All styling is in `static/style.css`; filter chips, theme toggle and mobile menu in `static/app.js`. Icons are inline SVG in `ICON_PATHS` (build.py), one per use case/vertical. Card pricing badges (Free option / Free trial / Quote-based / See vendor / Paid) are derived from words already in the `pricing` text (`price_label`). System fonts only; no external assets.
