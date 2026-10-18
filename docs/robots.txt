@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://jgonthego.github.io/localproai/sitemap.xml
