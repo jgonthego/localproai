@@ -89,8 +89,10 @@ def write(path, title, desc, body, schema=None):
 <div class="head-act"><button class="icon-btn" id="theme" type="button" aria-label="Toggle dark mode">{icon("sun","i sun")}{icon("moon","i moon")}</button><button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">{icon("menu")}</button></div></div></header>
 <main id="main">{body}</main>
 {NEWS}
-<footer class="site-foot"><div class="wrap foot-in"><a class="logo" href="{link('/')}">{LOGO}<span>{SITE}</span></a><p>&copy; {SITE} &middot; Pricing as stated on vendor sites on the date shown; verify before buying. &middot; <a href="mailto:{EMAIL}?subject=Advertise">Advertise</a> &middot; <a href="mailto:{EMAIL}?subject=Submit%20a%20tool">Submit a tool</a></p></div></footer>
+<footer class="site-foot"><div class="wrap foot-in"><a class="logo" href="{link('/')}">{LOGO}<span>{SITE}</span></a><p>&copy; {SITE} &middot; Pricing as stated on vendor sites on the date shown; verify before buying. &middot; <a href="mailto:{EMAIL}?subject=Advertise">Advertise</a> &middot; <a href="mailto:{EMAIL}?subject=Submit%20a%20tool">Submit a tool</a> &middot; Anonymous visit counts via GoatCounter (no cookies).</p></div></footer>
 <script src="{link('/app.js')}"></script>
+<script>window.goatcounter={{path:function(){{return location.pathname||'/'}}}}</script>
+<script data-goatcounter="https://jgonthego.goatcounter.com/count" async src="{link('/assets/gc.js')}"></script>
 </body></html>"""
     fp = os.path.join(OUT, path.strip("/"), "index.html") if path.endswith("/") else os.path.join(OUT, path.strip("/"))
     os.makedirs(os.path.dirname(fp), exist_ok=True); open(fp, "w").write(doc); pages.append(url)
@@ -116,6 +118,7 @@ def page_hero(kicker_icon, kicker, h1, sub="", extra="", crumb=""):
 if os.path.exists(OUT): shutil.rmtree(OUT)
 os.makedirs(OUT)
 shutil.copy("static/style.css", OUT); shutil.copy("static/app.js", OUT)
+os.makedirs(os.path.join(OUT, "assets")); shutil.copy("static/gc.js", os.path.join(OUT, "assets", "gc.js"))  # self-hosted GoatCounter count.js (ISC)
 open(os.path.join(OUT, ".nojekyll"), "w").close()
 uc_count = {u: len([t for t in tools if u in t["use_cases"]]) for u in UC}
 # home
