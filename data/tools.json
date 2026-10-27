@@ -1,8 +1,8 @@
 [
   {
     "name": "Jobber",
-    "url": "https://www.jobber.com",
-    "source_url": "https://www.jobber.com/pricing/",
+    "url": "https://www.getjobber.com",
+    "source_url": "https://www.getjobber.com/pricing/",
     "verticals": [
       "contractors"
     ],
@@ -11,8 +11,8 @@
       "quotes-estimates",
       "invoicing-payments"
     ],
-    "pricing": "See vendor pricing page (prices not shown in static page at check time)",
-    "pricing_checked": "2026-10-14",
+    "pricing": "Plans from $29/mo; annual billing from $21/mo (Core); extra users $29/mo; free trial",
+    "pricing_checked": "2026-10-27",
     "best_for": "Home service businesses wanting all-in-one quoting, scheduling and invoicing.",
     "sponsored": false
   },
@@ -29,7 +29,7 @@
       "invoicing-payments"
     ],
     "pricing": "From $59/mo billed annually; 14-day free trial",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Small HVAC, plumbing and electrical shops that want dispatch plus payments.",
     "sponsored": false
   },
@@ -46,7 +46,7 @@
       "crm"
     ],
     "pricing": "Quote-based (no public price listed)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Larger, multi-truck trades companies that need enterprise-grade field service software.",
     "sponsored": false
   },
@@ -63,7 +63,7 @@
       "invoicing-payments"
     ],
     "pricing": "Quote-based (no public price listed)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Growing trades teams wanting field service management with estimates and invoicing.",
     "sponsored": false
   },
@@ -79,7 +79,7 @@
       "invoicing-payments"
     ],
     "pricing": "Plans from $10/mo ($8.34/mo annual) up to $32/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Solo contractors who mainly need fast estimates and invoices.",
     "sponsored": false
   },
@@ -96,7 +96,7 @@
       "invoicing-payments"
     ],
     "pricing": "Owner Operator $49.95/mo ($45.95/mo yearly); Team +$5/user",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Owner-operators wanting a low-cost service CRM.",
     "sponsored": false
   },
@@ -113,7 +113,7 @@
       "invoicing-payments"
     ],
     "pricing": "Free (30 jobs/mo); Starter $29/mo (50 jobs/mo)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Small trades teams that want job-volume based pricing, iPhone-first.",
     "sponsored": false
   },
@@ -130,7 +130,7 @@
       "invoicing-payments"
     ],
     "pricing": "Start $60/mo (5 users); Run $119/mo (10 users); 20% off annual",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Small service teams on a budget wanting a QuickBooks-friendly FSM.",
     "sponsored": false
   },
@@ -146,7 +146,7 @@
       "invoicing-payments"
     ],
     "pricing": "Basic $49/mo; Pro $99/mo (per route)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Pest control, lawn and pool route businesses.",
     "sponsored": false
   },
@@ -162,14 +162,14 @@
       "scheduling"
     ],
     "pricing": "See vendor pricing page (not shown in static page at check time)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Roofing and exterior contractors managing jobs on boards.",
     "sponsored": false
   },
   {
     "name": "AccuLynx",
     "url": "https://acculynx.com",
-    "source_url": "https://acculynx.com/pricing/",
+    "source_url": "https://acculynx.com/pricing-request/",
     "verticals": [
       "contractors"
     ],
@@ -178,7 +178,7 @@
       "quotes-estimates"
     ],
     "pricing": "Quote-based (pricing by request)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Established roofing companies needing production and CRM.",
     "sponsored": false
   },
@@ -194,7 +194,7 @@
       "measurements"
     ],
     "pricing": "Free plan ($19 measurement reports); paid plans from $109/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Roofers who want satellite measurements and instant proposals.",
     "sponsored": false
   },
@@ -210,7 +210,7 @@
       "measurements"
     ],
     "pricing": "Pay per project; $999/year plan for discounted pricing",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Exterior contractors generating 3D measurements from phone photos.",
     "sponsored": false
   },
@@ -225,14 +225,14 @@
       "job-documentation"
     ],
     "pricing": "Paid plans; additional users $29 each (billed annually)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Contractors documenting jobs with photos and AI-written reports.",
     "sponsored": false
   },
   {
     "name": "Handoff",
     "url": "https://handoff.ai",
-    "source_url": "https://handoff.ai/pricing",
+    "source_url": "https://www.handoff.ai/pricing",
     "verticals": [
       "contractors"
     ],
@@ -240,14 +240,14 @@
       "quotes-estimates"
     ],
     "pricing": "Flex $149/mo ($119 annual); Pro $299/mo ($239 annual); Scale $899/mo ($719 annual)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Remodelers wanting AI-generated estimates from a description of the job.",
     "sponsored": false
   },
   {
     "name": "Projectmark",
     "url": "https://www.projectmark.com",
-    "source_url": "https://www.projectmark.com/pricing",
+    "source_url": "https://www.projectmark.com/plans",
     "verticals": [
       "contractors"
     ],
@@ -256,7 +256,7 @@
       "quotes-estimates"
     ],
     "pricing": "Starter/Scale/Enterprise tiers (see vendor page)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Construction firms wanting CRM plus job costing.",
     "sponsored": false
   },
@@ -271,7 +271,7 @@
       "phone-answering"
     ],
     "pricing": "Not published (demo-based)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "High-volume home service companies replacing or augmenting a call center.",
     "sponsored": false
   },
@@ -288,14 +288,14 @@
       "phone-answering"
     ],
     "pricing": "Professional $49/mo; Scale $149/mo; Growth $299/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Solo owners who miss calls on the job and want an AI answering service.",
     "sponsored": false
   },
   {
     "name": "Smith.ai",
     "url": "https://smith.ai",
-    "source_url": "https://smith.ai/pricing",
+    "source_url": "https://smith.ai/pricing/receptionists",
     "verticals": [
       "contractors",
       "realtors",
@@ -305,14 +305,14 @@
       "phone-answering"
     ],
     "pricing": "From $300/mo for 30 calls; $810/mo for 90 calls",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Businesses wanting human + AI receptionists with lead intake.",
     "sponsored": false
   },
   {
     "name": "Ruby",
     "url": "https://www.ruby.com",
-    "source_url": "https://www.ruby.com/pricing/",
+    "source_url": "https://www.ruby.com/plans-and-pricing/",
     "verticals": [
       "contractors",
       "realtors",
@@ -322,7 +322,7 @@
       "phone-answering"
     ],
     "pricing": "Chat bundles from $115 (10 chats); receptionist plans on page",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Owners who prefer live human receptionists over pure AI.",
     "sponsored": false
   },
@@ -339,7 +339,7 @@
       "phone-answering"
     ],
     "pricing": "Starter $79/mo; Growth $129/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Shops that want an AI agent that books jobs from missed calls.",
     "sponsored": false
   },
@@ -356,7 +356,7 @@
       "phone-answering"
     ],
     "pricing": "Enterprise contracts start at $30,000/year",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Larger operators or agencies building custom voice AI agents.",
     "sponsored": false
   },
@@ -373,7 +373,7 @@
       "phone-answering"
     ],
     "pricing": "From $99/mo ($79/mo billed annually)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Small businesses wanting an affordable AI receptionist.",
     "sponsored": false
   },
@@ -390,7 +390,7 @@
       "phone-answering"
     ],
     "pricing": "From $29/mo (60 min); overage $0.48/min; 7-day trial",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Very low-volume callers needing a cheap AI receptionist.",
     "sponsored": false
   },
@@ -407,7 +407,7 @@
       "phone-answering"
     ],
     "pricing": "$0.14/min with $0 platform fee; $0.12/min with $299/mo platform fee",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Tech-savvy owners or developers building their own phone agents.",
     "sponsored": false
   },
@@ -423,14 +423,14 @@
       "reviews"
     ],
     "pricing": "Starter $75/mo; Pro $125/mo; no contracts",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Home service businesses automating review requests.",
     "sponsored": false
   },
   {
     "name": "Broadly",
     "url": "https://broadly.com",
-    "source_url": "https://broadly.com/pricing/",
+    "source_url": "https://broadly.com/pricing-ai-workforce",
     "verticals": [
       "contractors"
     ],
@@ -439,7 +439,7 @@
       "phone-answering"
     ],
     "pricing": "AI Workforce package $799/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Local businesses wanting reviews, web chat and AI answering bundled.",
     "sponsored": false
   },
@@ -456,7 +456,7 @@
       "reviews"
     ],
     "pricing": "$99/mo for 1 location; volume pricing per location",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Multi-location businesses and agencies managing reviews.",
     "sponsored": false
   },
@@ -473,7 +473,7 @@
       "scheduling"
     ],
     "pricing": "Starting from $199/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Appointment-based businesses wanting phones, texting and reviews together.",
     "sponsored": false
   },
@@ -490,14 +490,14 @@
       "scheduling"
     ],
     "pricing": "Standard $10/seat/mo; Teams $16/seat/mo; Enterprise from $15k/yr",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Anyone booking consultations or showings via a link.",
     "sponsored": false
   },
   {
     "name": "Acuity Scheduling",
     "url": "https://acuityscheduling.com",
-    "source_url": "https://acuityscheduling.com/signup.php",
+    "source_url": "https://acuityscheduling.com/pricing",
     "verticals": [
       "salons",
       "realtors"
@@ -506,7 +506,7 @@
       "scheduling"
     ],
     "pricing": "Starter $16/mo, Standard $27/mo, Premium $55/mo (annual; higher monthly)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Solo service providers needing client self-booking with intake forms.",
     "sponsored": false
   },
@@ -522,7 +522,7 @@
       "invoicing-payments"
     ],
     "pricing": "Independent $19.95/mo; Team $14.95 per team member/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Salons and barbers wanting low-cost booking with marketplace exposure.",
     "sponsored": false
   },
@@ -537,8 +537,8 @@
       "scheduling",
       "invoicing-payments"
     ],
-    "pricing": "From $143/mo for 1 location; higher tiers $234\u2013$328/mo per location",
-    "pricing_checked": "2026-10-14",
+    "pricing": "From $143/mo for 1 location; higher tiers $234–$328/mo per location",
+    "pricing_checked": "2026-10-27",
     "best_for": "Upscale salons and spas wanting a premium client experience.",
     "sponsored": false
   },
@@ -554,7 +554,7 @@
       "invoicing-payments"
     ],
     "pricing": "Standard $24/mo annual ($28 monthly); Gold $48/mo annual ($56 monthly)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Independent stylists and small beauty studios.",
     "sponsored": false
   },
@@ -570,14 +570,14 @@
       "invoicing-payments"
     ],
     "pricing": "$120/mo per location + $10/mo per user; add-ons extra",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Salons and spas wanting automation-heavy front desk software.",
     "sponsored": false
   },
   {
     "name": "Booksy",
     "url": "https://biz.booksy.com/en-us",
-    "source_url": "https://biz.booksy.com/en-us/pricing",
+    "source_url": "https://biz.booksy.com/pricing",
     "verticals": [
       "salons"
     ],
@@ -585,14 +585,14 @@
       "scheduling"
     ],
     "pricing": "$29.99/mo + tax; extra users $20/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Barbers and stylists who want marketplace bookings.",
     "sponsored": false
   },
   {
     "name": "Zenoti",
     "url": "https://www.zenoti.com",
-    "source_url": "https://www.zenoti.com/pricing",
+    "source_url": "https://www.zenoti.com/pricing-zenoti",
     "verticals": [
       "salons"
     ],
@@ -601,7 +601,7 @@
       "invoicing-payments"
     ],
     "pricing": "Quote-based (no public price listed)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Multi-location salon, spa and medspa chains.",
     "sponsored": false
   },
@@ -617,7 +617,7 @@
       "listings-marketing"
     ],
     "pricing": "Quote-based plans; SMS bundles e.g. 7,500 SMS for $99",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Salons focused on client retention marketing.",
     "sponsored": false
   },
@@ -633,7 +633,7 @@
       "invoicing-payments"
     ],
     "pricing": "Basic $29/mo; Deluxe $69/mo; Deluxe Growth $149/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Small salons wanting predictable flat pricing.",
     "sponsored": false
   },
@@ -648,7 +648,7 @@
       "crm"
     ],
     "pricing": "Grow $69/user/mo; Pro $499/mo (see page for user limits)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Real estate teams that live on speed-to-lead follow-up.",
     "sponsored": false
   },
@@ -664,14 +664,14 @@
       "phone-answering"
     ],
     "pricing": "Platform + usage: voice from $0.07/min, SMS from $0.02/msg",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Agents wanting AI to qualify and nurture inbound leads.",
     "sponsored": false
   },
   {
     "name": "Real Geeks",
     "url": "https://www.realgeeks.com",
-    "source_url": "https://www.realgeeks.com/pricing/",
+    "source_url": "https://www.realgeeks.com/real-geeks-pricing",
     "verticals": [
       "realtors"
     ],
@@ -680,7 +680,7 @@
       "listings-marketing"
     ],
     "pricing": "Platform $399/mo + $500 setup; lead packages from $299/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Agents wanting an IDX site plus CRM and paid leads.",
     "sponsored": false
   },
@@ -695,7 +695,7 @@
       "virtual-staging"
     ],
     "pricing": "Basic $16/mo (6 photos) with yearly billing; larger plans available",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Agents staging empty listings quickly and cheaply.",
     "sponsored": false
   },
@@ -709,8 +709,8 @@
     "use_cases": [
       "virtual-staging"
     ],
-    "pricing": "Plans $14\u2013$99/mo (credits)",
-    "pricing_checked": "2026-10-14",
+    "pricing": "Plans $14–$99/mo (credits)",
+    "pricing_checked": "2026-10-27",
     "best_for": "Agents and stagers wanting AI redesign and staging.",
     "sponsored": false
   },
@@ -725,7 +725,7 @@
       "virtual-staging"
     ],
     "pricing": "Standard $19/mo (60 photo credits); Advanced tier available",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Brokerages staging high photo volumes.",
     "sponsored": false
   },
@@ -741,7 +741,7 @@
       "virtual-staging"
     ],
     "pricing": "Essential $19/mo; Professional $36/mo; Expert $150/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Agents writing listing descriptions and social posts.",
     "sponsored": false
   },
@@ -758,7 +758,7 @@
       "listings-marketing"
     ],
     "pricing": "Pro $69/seat/mo or $59/seat/mo billed yearly",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Businesses producing lots of on-brand marketing copy.",
     "sponsored": false
   },
@@ -775,7 +775,7 @@
       "listings-marketing"
     ],
     "pricing": "$29/mo monthly or $24/mo annually (entry plan)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Owners wanting quick ad, email and listing copy.",
     "sponsored": false
   },
@@ -793,7 +793,7 @@
       "general-assistant"
     ],
     "pricing": "Free; Pro $20/mo ($17/mo annual)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "General AI assistant for writing quotes, emails and marketing.",
     "sponsored": false
   },
@@ -810,7 +810,7 @@
       "listings-marketing"
     ],
     "pricing": "Free; Pro $12/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Polishing customer emails, proposals and listings.",
     "sponsored": false
   },
@@ -826,8 +826,8 @@
     "use_cases": [
       "video"
     ],
-    "pricing": "Hobbyist $16\u2013$24/person/mo; Creator $24\u2013$35; Business $50\u2013$65",
-    "pricing_checked": "2026-10-14",
+    "pricing": "Hobbyist $16–$24/person/mo; Creator $24–$35; Business $50–$65",
+    "pricing_checked": "2026-10-27",
     "best_for": "Editing listing tours and how-to videos by editing text.",
     "sponsored": false
   },
@@ -844,7 +844,7 @@
       "video"
     ],
     "pricing": "Starter $15/mo (150 credits)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Turning long videos into short social clips.",
     "sponsored": false
   },
@@ -860,7 +860,7 @@
       "social-media"
     ],
     "pricing": "Starter $18.75/mo billed yearly; higher tiers from $37.50/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Salons and agents scheduling Instagram/TikTok posts.",
     "sponsored": false
   },
@@ -877,7 +877,7 @@
       "social-media"
     ],
     "pricing": "Essentials $5/mo per channel; Team $10/mo per channel",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Budget-friendly social scheduling with an AI assistant.",
     "sponsored": false
   },
@@ -894,7 +894,7 @@
       "social-media"
     ],
     "pricing": "Standard $99, Professional $199, Advanced $399 (see page)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Businesses managing several social accounts with inbox and analytics.",
     "sponsored": false
   },
@@ -911,7 +911,7 @@
       "social-media"
     ],
     "pricing": "Starter $29/mo; Team $79/mo; Agency $199/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "AI-generated social posts plus scheduling.",
     "sponsored": false
   },
@@ -928,14 +928,14 @@
       "social-media"
     ],
     "pricing": "Free start; higher plans listed (e.g. $212/mo billed yearly)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Generating social ads and videos from a prompt.",
     "sponsored": false
   },
   {
     "name": "Durable",
     "url": "https://durable.co",
-    "source_url": "https://durable.co/pricing",
+    "source_url": "https://durable.com/pricing",
     "verticals": [
       "contractors",
       "salons"
@@ -944,7 +944,7 @@
       "website"
     ],
     "pricing": "Free plan; paid from $25/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Getting a basic local business website online fast.",
     "sponsored": false
   },
@@ -960,8 +960,8 @@
     "use_cases": [
       "website"
     ],
-    "pricing": "Promo from $2.99/mo (48-mo term), renews $10.99/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing": "Promo from $2.49/mo (48-mo term), renews $10.99/mo",
+    "pricing_checked": "2026-10-27",
     "best_for": "Cheap AI-built website with hosting included.",
     "sponsored": false
   },
@@ -977,7 +977,7 @@
       "local-seo"
     ],
     "pricing": "$49/mo ($39/mo annual); agency $169/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Owners doing their own Google Business Profile optimization.",
     "sponsored": false
   },
@@ -994,7 +994,7 @@
       "local-seo"
     ],
     "pricing": "Paige AI from $99/business/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Automating Google Business Profile posts and local SEO.",
     "sponsored": false
   },
@@ -1011,7 +1011,7 @@
       "bookkeeping"
     ],
     "pricing": "Promo pricing first 3 months; Established $97/mo after (see page)",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Small businesses wanting cloud accounting with bank feeds.",
     "sponsored": false
   },
@@ -1029,7 +1029,7 @@
       "invoicing-payments"
     ],
     "pricing": "Lite promo $1/mo first year; regular $23/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Solo service pros invoicing clients and tracking expenses.",
     "sponsored": false
   },
@@ -1047,7 +1047,7 @@
       "invoicing-payments"
     ],
     "pricing": "Starter $0; card payments 2.9% + $0.60",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Very small businesses wanting free accounting.",
     "sponsored": false
   },
@@ -1064,7 +1064,7 @@
       "bookkeeping"
     ],
     "pricing": "From $199/mo (micro business); $399/mo; $649/mo with tax",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Owners who want bookkeeping done for them.",
     "sponsored": false
   },
@@ -1081,7 +1081,7 @@
       "bookkeeping"
     ],
     "pricing": "$129 per business/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Businesses on QuickBooks/Xero wanting AI transaction categorization.",
     "sponsored": false
   },
@@ -1097,7 +1097,7 @@
       "general-assistant"
     ],
     "pricing": "Free; Pro $10/seat/mo annual; Business $19/seat/mo annual",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Recording and summarizing client calls and meetings.",
     "sponsored": false
   },
@@ -1113,7 +1113,7 @@
       "general-assistant"
     ],
     "pricing": "Pro $16.99/user/mo monthly ($8.33 annual); Business $30/user/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Transcribing walkthroughs, client calls and notes.",
     "sponsored": false
   },
@@ -1132,7 +1132,7 @@
       "listings-marketing"
     ],
     "pricing": "Starter $97/mo; Unlimited $297/mo; Agency Pro $497/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "All-in-one CRM/funnels, popular with marketing agencies serving local businesses.",
     "sponsored": false
   },
@@ -1149,7 +1149,7 @@
       "automation"
     ],
     "pricing": "Free; Professional from $19.99/mo; Team from $69/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Connecting your booking, CRM and accounting apps without code.",
     "sponsored": false
   },
@@ -1166,8 +1166,59 @@
       "website-chat"
     ],
     "pricing": "From $24.17/mo (100 conversations); higher tiers from $49.17/mo",
-    "pricing_checked": "2026-10-14",
+    "pricing_checked": "2026-10-27",
     "best_for": "Adding an AI chatbot to a local business website.",
+    "sponsored": false
+  },
+  {
+    "name": "Wise Agent",
+    "url": "https://wiseagent.com",
+    "source_url": "https://wiseagent.com/pricing.asp",
+    "verticals": [
+      "realtors"
+    ],
+    "use_cases": [
+      "crm",
+      "lead-follow-up",
+      "listings-marketing"
+    ],
+    "pricing": "CRM $49/mo ($42/mo billed annually); CRM + Social $69/mo ($59/mo annually); 14-day free trial",
+    "pricing_checked": "2026-10-27",
+    "best_for": "Agents wanting an affordable real estate CRM with AI follow-up and an AI writing assistant.",
+    "sponsored": false
+  },
+  {
+    "name": "Vagaro",
+    "url": "https://www.vagaro.com",
+    "source_url": "https://www.vagaro.com/pro/pricing",
+    "verticals": [
+      "salons"
+    ],
+    "use_cases": [
+      "scheduling",
+      "crm",
+      "invoicing-payments"
+    ],
+    "pricing": "$30/mo for 1 calendar (intro $23.99/mo for first 6 months); extra calendars $10 each",
+    "pricing_checked": "2026-10-27",
+    "best_for": "Salons and spas wanting booking, client CRM and payments with a built-in AI assistant.",
+    "sponsored": false
+  },
+  {
+    "name": "Square Appointments",
+    "url": "https://squareup.com/us/en/appointments",
+    "source_url": "https://squareup.com/us/en/appointments/pricing",
+    "verticals": [
+      "salons"
+    ],
+    "use_cases": [
+      "scheduling",
+      "crm",
+      "invoicing-payments"
+    ],
+    "pricing": "Free $0/mo; Plus $49/mo; Premium $149/mo (per location); processing fees apply",
+    "pricing_checked": "2026-10-27",
+    "best_for": "Solo stylists and small salons wanting free booking plus Square payments and Square AI insights.",
     "sponsored": false
   }
 ]
