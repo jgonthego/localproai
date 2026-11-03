@@ -137,6 +137,20 @@ write("/", f"{SITE} — AI Tools for Contractors, Realtors & Salons", f"A curate
 <div class="chips scroll" role="group" aria-label="Filter by use case">{uchips}</div>
 <p class="count" id="count" aria-live="polite">Showing {len(tools)} tools</p>
 {grid(tools)}<div class="empty" id="empty" hidden>{icon("search")}<p>No tools match those filters.</p><button type="button" class="btn ghost" id="reset">Clear filters</button></div></div>''', itemlist("All AI tools", tools))
+
+# ---------- SEO helpers ----------
+VSHORT = {"contractors": "Contractors", "realtors": "Realtors", "salons": "Salons"}
+def ucn(un): return un[3:] if un.startswith("AI ") else un  # avoid "AI AI Assistants"
+def ucT(un): return ucn(un) if ucn(un).endswith("Builders") else ucn(un) + " Tools"  # avoid "Builders Tools"
+def fit_title(*cands, limit=65):
+    for t in cands:
+        for x in (t, t.rsplit(" | ", 1)[0]):
+            if len(x) <= limit: return x
+    return cands[-1]
+def clip(s, n=160):
+    s = " ".join(s.split())
+    return s if len(s) <= n else s[:n-1].rsplit(" ", 1)[0].rstrip(",;:—-") + "…"
+def plural(n, w): return f"{n} {w}{'' if n == 1 else 's'}"
 # verticals, use cases, combos
 for v, vn in VERT.items():
     ts = [t for t in tools if v in t["verticals"]]
@@ -148,7 +162,7 @@ for v, vn in VERT.items():
     for u, un in combos:
         cs = [t for t in ts if u in t["use_cases"]]
         rows = "".join(f'<tr><th scope="row"><a href="{link("/tools/"+t["slug"]+"/")}">{e(t["name"])}</a>{" "+SP if t.get("sponsored") else ""}</th><td data-l="Best for">{e(t["best_for"])}</td><td data-l="Pricing">{e(t["pricing"])}</td><td data-l="Checked">{t["pricing_checked"]}</td></tr>' for t in order(cs))
-        write(f"/best/{v}/{u}/", f"Best AI Tools for {vn} {un} ({len(cs)}) | {SITE}", f"The best AI {un.lower()} tools for {vn.lower()}: {', '.join(t['name'] for t in cs[:4])} and more, with pricing and honest notes.",
+        write(f"/best/{v}/{u}/", fit_title(f"Best AI {ucT(un)} for {VSHORT[v]} ({len(cs)}) | {SITE}"), clip(f"Compare {len(cs)} AI {ucT(un)} for {vn.lower()}: {', '.join(t['name'] for t in order(cs)[:3])}{' and more' if len(cs) > 3 else ''}. Vendor-checked pricing and best-for notes."),
           page_hero(u, f"{len(cs)} tools compared", f"Best AI tools for {vn} {un}", crumb=crumbs((vn, link("/"+v+"/")), (un, None))) +
           f'<div class="wrap"><h2 class="sec">At a glance</h2><div class="tbl-wrap"><table class="compare"><thead><tr><th scope="col">Tool</th><th scope="col">Best for</th><th scope="col">Pricing</th><th scope="col">Checked</th></tr></thead><tbody>{rows}</tbody></table></div><h2 class="sec">The picks</h2>{grid(cs)}</div>', itemlist(f"Best AI tools for {vn} {un}", cs))
 idx = ""
@@ -156,7 +170,7 @@ for u, un in UC.items():
     ts = [t for t in tools if u in t["use_cases"]]
     if not ts: continue
     idx += f'<li><a href="{link("/use-cases/"+u+"/")}"><span class="ico">{icon(u)}</span><span class="uc-n">{un}</span> <span class="cnt">({len(ts)})</span></a></li>'
-    write(f"/use-cases/{u}/", f"AI {un} Tools for Local Businesses | {SITE}", f"{len(ts)} AI {un.lower()} tools for contractors, realtors and salons, with vendor-stated pricing.",
+    write(f"/use-cases/{u}/", fit_title(f"AI {ucT(un)} for Contractors, Realtors & Salons | {SITE}", f"AI {ucT(un)} for Local Service Businesses | {SITE}", f"AI {ucT(un)} for Local Businesses | {SITE}"), clip(f"Compare {plural(len(ts), 'AI ' + ucT(un)[:-1] if ucT(un).endswith('s') else 'AI ' + ucT(un))} for contractors, realtors and salons: {', '.join(t['name'] for t in order(ts)[:3])}. Pricing checked on vendor sites."),
       page_hero(u, f"{len(ts)} tools", f"AI {un} tools", crumb=crumbs(("Use cases", link("/use-cases/")), (un, None))) + f'<div class="wrap">{grid(ts)}</div>', itemlist(f"AI {un} tools", ts))
 write("/use-cases/", f"AI Tools by Use Case | {SITE}", "Browse AI tools for local service businesses by job: quotes, scheduling, reviews, phone answering, bookkeeping and more.",
       page_hero("automation", "Browse by job", "Browse by use case", crumb=crumbs(("Use cases", None))) + f'<div class="wrap"><ul class="ucgrid">{idx}</ul></div>')
@@ -166,7 +180,7 @@ for t in tools:
     rel = order([x for x in tools if x is not t and set(x["use_cases"]) & set(t["use_cases"]) and set(x["verticals"]) & set(t["verticals"])])[:3]
     relh = f'<h2 class="sec">Similar tools</h2><div class="grid">{"".join(card(x) for x in rel)}</div>' if rel else ""
     u0 = t["use_cases"][0]
-    write(f"/tools/{t['slug']}/", f"{t['name']}: Pricing & Review for Local Businesses | {SITE}", f"{t['name']} — {t['best_for']} Pricing: {t['pricing']}"[:300],
+    write(f"/tools/{t['slug']}/", fit_title(f"{t['name']} Pricing, Plans & Review | {SITE}"), clip(f"{t['name']} pricing: {t['pricing']}. Best for: {t['best_for']}"),
       f'''<section class="phero tool-hero"><div class="glow" aria-hidden="true"></div><div class="wrap">{crumbs((UC[u0], link("/use-cases/"+u0+"/")), (t["name"], None))}
 <div class="tool-head"><span class="ico xl">{icon(u0)}</span><div>{SP if t.get('sponsored') else ''}<h1>{e(t['name'])}</h1><p class="lead"><strong>Best for:</strong> {e(t['best_for'])}</p></div></div></div></section>
 <div class="wrap tool-layout"><div class="tool-main">
