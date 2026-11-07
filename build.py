@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Static site generator for LocalProAI. Usage: BASE=https://example.com python3 build.py"""
 import json, os, shutil, html, re, urllib.parse
+import longtail
 from collections import defaultdict
 BASE = os.environ.get("BASE", "https://localproai.example").rstrip("/")
 PATH_PREFIX = os.environ.get("PATH_PREFIX", "").rstrip("/")  # e.g. /localai-directory for project Pages
@@ -16,8 +17,11 @@ UC = {"quotes-estimates":"Quotes & Estimates","scheduling":"Scheduling & Booking
 tools = json.load(open("data/tools.json"))
 slug = lambda s: re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
 for t in tools: t["slug"] = slug(t["name"])
+ASOF = max(t["pricing_checked"] for t in tools)
+plan = longtail.prepare(tools, UC, VERT, SITE)
 e = html.escape
-pages = []
+pages = []  # (absolute url, lastmod)
+SEEN_T, SEEN_D = {}, {}
 def link(p): return f"{PATH_PREFIX}{p}"
 
 # ---------- inline SVG icon set (stroke icons, 24x24, no external assets) ----------
@@ -73,11 +77,22 @@ def price_label(p):
 THEME_JS = "<script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>"
 NEWS = f'''<section class="news wrap"><div class="news-card"><div class="news-copy"><span class="news-ico">{icon("mail")}</span><h2>Get new AI tools for local businesses</h2></div><form action="{FORM}" method="POST"><input type="email" name="email" placeholder="you@business.com" required aria-label="Email"><button>Subscribe</button></form></div></section>''' if SHOW_FORM else "<!-- NEWSLETTER HOOK: set FORM_ID env var to enable signup -->"
 
-def write(path, title, desc, body, schema=None):
+def write(path, title, desc, body, schema=None, lastmod=None):
     url = BASE + PATH_PREFIX + path
+    if title in SEEN_T:
+        raise SystemExit(f"Duplicate title {title!r}\n  {path}\n  {SEEN_T[title]}")
+    if desc in SEEN_D:
+        raise SystemExit(f"Duplicate meta description {desc!r}\n  {path}\n  {SEEN_D[desc]}")
+    SEEN_T[title] = path
+    SEEN_D[desc] = path
+    lm = lastmod or ASOF
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", lm):
+        raise SystemExit(f"Bad lastmod {lm!r} for {path}")
     sj = f'<script type="application/ld+json">{json.dumps(schema)}</script>' if schema else ""
     CUR = ' aria-current="page"'
     navl = ''.join(f'<a href="{link("/"+k+"/")}"{CUR if path.startswith("/"+k+"/") else ""}>{v}</a>' for k,v in VERT.items())
+    gcur = ' aria-current="page"' if path.startswith("/guides/") else ""
+    guides_nav = f'<a href="{link("/guides/")}"{gcur}>Guides</a>'
     doc = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{e(title)}</title><meta name="description" content="{e(desc)}"><link rel="canonical" href="{url}">
 <meta property="og:type" content="website"><meta property="og:title" content="{e(title)}"><meta property="og:description" content="{e(desc)}"><meta property="og:url" content="{url}"><meta property="og:site_name" content="{SITE}">
@@ -85,7 +100,7 @@ def write(path, title, desc, body, schema=None):
 <link rel="stylesheet" href="{link('/style.css')}">{sj}</head><body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="site-head"><div class="wrap head-in"><a class="logo" href="{link('/')}">{LOGO}<span>{SITE}</span></a>
-<nav id="nav" aria-label="Main">{navl}<a href="{link('/use-cases/')}"{' aria-current="page"' if path.startswith('/use-cases/') else ''}>Use cases</a><a href="{link('/advertise/')}"{' aria-current="page"' if path.startswith('/advertise/') else ''}>Advertise</a><a class="nav-cta" href="mailto:{EMAIL}?subject=Submit%20a%20tool">Submit a tool</a></nav>
+<nav id="nav" aria-label="Main">{navl}{guides_nav}<a href="{link('/use-cases/')}"{' aria-current="page"' if path.startswith('/use-cases/') else ''}>Use cases</a><a href="{link('/advertise/')}"{' aria-current="page"' if path.startswith('/advertise/') else ''}>Advertise</a><a class="nav-cta" href="mailto:{EMAIL}?subject=Submit%20a%20tool">Submit a tool</a></nav>
 <div class="head-act"><button class="icon-btn" id="theme" type="button" aria-label="Toggle dark mode">{icon("sun","i sun")}{icon("moon","i moon")}</button><button class="icon-btn menu-btn" id="menu" type="button" aria-label="Menu" aria-expanded="false" aria-controls="nav">{icon("menu")}</button></div></div></header>
 <main id="main">{body}</main>
 {NEWS}
@@ -95,7 +110,7 @@ def write(path, title, desc, body, schema=None):
 <script data-goatcounter="https://jgonthego.goatcounter.com/count" async src="{link('/assets/gc.js')}"></script>
 </body></html>"""
     fp = os.path.join(OUT, path.strip("/"), "index.html") if path.endswith("/") else os.path.join(OUT, path.strip("/"))
-    os.makedirs(os.path.dirname(fp), exist_ok=True); open(fp, "w").write(doc); pages.append(url)
+    os.makedirs(os.path.dirname(fp), exist_ok=True); open(fp, "w").write(doc); pages.append((url, lm))
 
 SP = f'<span class="sp">{icon("shield")}Sponsored</span>'
 def tags_html(t): return "".join(f'<a class="tag" href="{link("/use-cases/"+u+"/")}">{icon(u)}{UC[u]}</a>' for u in t["use_cases"])
@@ -131,6 +146,7 @@ write("/", f"{SITE} — AI Tools for Contractors, Realtors & Salons", f"A curate
 <div class="filters" role="search"><label class="searchbox">{icon("search")}<input id="q" type="search" placeholder="Search tools…" aria-label="Search" autocomplete="off"><kbd>/</kbd></label>
 <div class="chips seg" role="group" aria-label="Filter by vertical">{vchips}</div></div>
 <div class="vcards">{"".join(f'<a class="vcard" href="{link("/"+k+"/")}"><span class="ico">{icon(k)}</span><span><strong>{v}</strong><small>{len([t for t in tools if k in t["verticals"]])} tools</small></span>{icon("arrow","i arr")}</a>' for k,v in VERT.items())}</div>
+<p class="guides-home"><a href="{link('/guides/')}">{icon("arrow")}Pricing, alternatives and comparisons <small>{plan["guide_count"]} pages</small></a></p>
 </div></section>
 <div class="wrap">
 <!-- SPONSOR SLOT: homepage feature (add real sponsor here) -->{slot(f"Sponsor%20{SITE}%20homepage", "Homepage feature slot")}
@@ -151,6 +167,18 @@ def clip(s, n=160):
     s = " ".join(s.split())
     return s if len(s) <= n else s[:n-1].rsplit(" ", 1)[0].rstrip(",;:—-") + "…"
 def plural(n, w): return f"{n} {w}{'' if n == 1 else 's'}"
+def guide_list(items):
+    if not items: return ""
+    lis = "".join(f'<li><a href="{link(it["path"])}">{icon(it["icon"])}<span>{e(it["label"])}</span>{icon("arrow","i arr")}</a></li>' for it in items)
+    return f'<ul class="guides">{lis}</ul>'
+def vertical_guides(v):
+    block = plan["vertical_links"].get(v, {})
+    parts = []
+    if block.get("pricing"): parts.append('<h2 class="sec">Pricing guides</h2>' + guide_list(block["pricing"]))
+    if block.get("comparisons"): parts.append('<h2 class="sec">Comparisons</h2>' + guide_list(block["comparisons"]))
+    if block.get("niches"): parts.append('<h2 class="sec">Trades and audiences</h2>' + guide_list(block["niches"]))
+    return "".join(parts)
+def checked(ts): return max(t["pricing_checked"] for t in ts)
 # verticals, use cases, combos
 for v, vn in VERT.items():
     ts = [t for t in tools if v in t["verticals"]]
@@ -158,20 +186,22 @@ for v, vn in VERT.items():
     cl = "".join(f'<li><a href="{link(f"/best/{v}/{u}/")}">{icon(u)}<span>Best AI {un.lower()} tools for {vn.lower()}</span>{icon("arrow","i arr")}</a></li>' for u, un in combos)
     write(f"/{v}/", f"AI Tools for {vn} ({len(ts)} picks) | {SITE}", f"{len(ts)} AI tools for {vn.lower()}: quoting, scheduling, phone answering, marketing and more, with pricing checked on vendor sites.",
       page_hero(v, f"{len(ts)} tools", f'AI tools for <span class="grad">{vn}</span>', crumb=crumbs((vn, None))) +
-      f'<div class="wrap"><!-- SPONSOR SLOT: featured {vn} (add real sponsor here) -->{slot(f"Sponsor%20{vn}%20page", f"Featured {vn} slot")}<h2 class="sec">Best-of guides</h2><ul class="guides">{cl}</ul><h2 class="sec">All {vn.lower()} tools</h2>{grid(ts)}</div>', itemlist(f"AI tools for {vn}", ts))
+      f'<div class="wrap"><!-- SPONSOR SLOT: featured {vn} (add real sponsor here) -->{slot(f"Sponsor%20{vn}%20page", f"Featured {vn} slot")}<h2 class="sec">Best-of guides</h2><ul class="guides">{cl}</ul>{vertical_guides(v)}<h2 class="sec">All {vn.lower()} tools</h2>{grid(ts)}</div>', itemlist(f"AI tools for {vn}", ts), lastmod=checked(ts))
     for u, un in combos:
         cs = [t for t in ts if u in t["use_cases"]]
         rows = "".join(f'<tr><th scope="row"><a href="{link("/tools/"+t["slug"]+"/")}">{e(t["name"])}</a>{" "+SP if t.get("sponsored") else ""}</th><td data-l="Best for">{e(t["best_for"])}</td><td data-l="Pricing">{e(t["pricing"])}</td><td data-l="Checked">{t["pricing_checked"]}</td></tr>' for t in order(cs))
+        pp = plan["price_path"].get((v, u))
+        price_note = f'<p class="prose"><a href="{link(pp)}">Vendor pricing sentences for these {len(cs)} tools</a></p>' if pp else ""
         write(f"/best/{v}/{u}/", fit_title(f"Best AI {ucT(un)} for {VSHORT[v]} ({len(cs)}) | {SITE}"), clip(f"Compare {len(cs)} AI {ucT(un)} for {vn.lower()}: {', '.join(t['name'] for t in order(cs)[:3])}{' and more' if len(cs) > 3 else ''}. Vendor-checked pricing and best-for notes."),
           page_hero(u, f"{len(cs)} tools compared", f"Best AI tools for {vn} {un}", crumb=crumbs((vn, link("/"+v+"/")), (un, None))) +
-          f'<div class="wrap"><h2 class="sec">At a glance</h2><div class="tbl-wrap"><table class="compare"><thead><tr><th scope="col">Tool</th><th scope="col">Best for</th><th scope="col">Pricing</th><th scope="col">Checked</th></tr></thead><tbody>{rows}</tbody></table></div><h2 class="sec">The picks</h2>{grid(cs)}</div>', itemlist(f"Best AI tools for {vn} {un}", cs))
+          f'<div class="wrap"><h2 class="sec">At a glance</h2><div class="tbl-wrap"><table class="compare"><thead><tr><th scope="col">Tool</th><th scope="col">Best for</th><th scope="col">Pricing</th><th scope="col">Checked</th></tr></thead><tbody>{rows}</tbody></table></div>{price_note}<h2 class="sec">The picks</h2>{grid(cs)}</div>', itemlist(f"Best AI tools for {vn} {un}", cs), lastmod=checked(cs))
 idx = ""
 for u, un in UC.items():
     ts = [t for t in tools if u in t["use_cases"]]
     if not ts: continue
     idx += f'<li><a href="{link("/use-cases/"+u+"/")}"><span class="ico">{icon(u)}</span><span class="uc-n">{un}</span> <span class="cnt">({len(ts)})</span></a></li>'
     write(f"/use-cases/{u}/", fit_title(f"AI {ucT(un)} for Contractors, Realtors & Salons | {SITE}", f"AI {ucT(un)} for Local Service Businesses | {SITE}", f"AI {ucT(un)} for Local Businesses | {SITE}"), clip(f"Compare {plural(len(ts), 'AI ' + ucT(un)[:-1] if ucT(un).endswith('s') else 'AI ' + ucT(un))} for contractors, realtors and salons: {', '.join(t['name'] for t in order(ts)[:3])}. Pricing checked on vendor sites."),
-      page_hero(u, f"{len(ts)} tools", f"AI {un} tools", crumb=crumbs(("Use cases", link("/use-cases/")), (un, None))) + f'<div class="wrap">{grid(ts)}</div>', itemlist(f"AI {un} tools", ts))
+      page_hero(u, f"{len(ts)} tools", f"AI {un} tools", crumb=crumbs(("Use cases", link("/use-cases/")), (un, None))) + f'<div class="wrap">{grid(ts)}</div>', itemlist(f"AI {un} tools", ts), lastmod=checked(ts))
 write("/use-cases/", f"AI Tools by Use Case | {SITE}", "Browse AI tools for local service businesses by job: quotes, scheduling, reviews, phone answering, bookkeeping and more.",
       page_hero("automation", "Browse by job", "Browse by use case", crumb=crumbs(("Use cases", None))) + f'<div class="wrap"><ul class="ucgrid">{idx}</ul></div>')
 for t in tools:
@@ -179,6 +209,8 @@ for t in tools:
     pl, pk = price_label(t["pricing"])
     rel = order([x for x in tools if x is not t and set(x["use_cases"]) & set(t["use_cases"]) and set(x["verticals"]) & set(t["verticals"])])[:3]
     relh = f'<h2 class="sec">Similar tools</h2><div class="grid">{"".join(card(x) for x in rel)}</div>' if rel else ""
+    ap = plan["alt_path"].get(t["slug"])
+    alt_panel = f'<div class="panel"><h2>{icon("search")}Alternatives</h2><p><a href="{link(ap)}">{plan["alt_count"][t["slug"]]} tools that overlap {e(t["name"])}</a></p></div>' if ap else ""
     u0 = t["use_cases"][0]
     write(f"/tools/{t['slug']}/", fit_title(f"{t['name']} Pricing, Plans & Review | {SITE}"), clip(f"{t['name']} pricing: {t['pricing']}. Best for: {t['best_for']}"),
       f'''<section class="phero tool-hero"><div class="glow" aria-hidden="true"></div><div class="wrap">{crumbs((UC[u0], link("/use-cases/"+u0+"/")), (t["name"], None))}
@@ -186,17 +218,22 @@ for t in tools:
 <div class="wrap tool-layout"><div class="tool-main">
 <div class="panel"><h2>{icon("check")}Verticals</h2><p><strong class="vh">Verticals:</strong> {vs}</p></div>
 <div class="panel"><h2>{icon("automation")}Use cases</h2><p class="tags">{tags_html(t)}</p></div>
+{alt_panel}
 <div class="panel muted"><p><small>Source: <a href="{e(t['source_url'])}" rel="nofollow">{e(t['source_url'])}</a></small></p>
 <p><small>Are you the vendor? <a href="mailto:{EMAIL}?subject=Claim%20listing:%20{e(t['name'])}">Claim this free listing</a>.</small></p></div></div>
 <aside class="price-card"><span class="pbadge pb-{pk}">{pl}</span><h2>Pricing</h2><p class="pc-price"><strong class="vh">Pricing:</strong> {e(t['pricing'])} <small>(as stated on vendor site, checked {t['pricing_checked']})</small></p>
 <p><a class="btn" href="{e(t['url'])}" rel="nofollow noopener" target="_blank">Visit {e(t['name'])}{icon("external")}</a></p></aside></div>
 <div class="wrap">{relh}</div>''',
-      {"@context":"https://schema.org","@type":"SoftwareApplication","name":t["name"],"url":t["url"],"applicationCategory":"BusinessApplication","description":t["best_for"]})
+      {"@context":"https://schema.org","@type":"SoftwareApplication","name":t["name"],"url":t["url"],"applicationCategory":"BusinessApplication","description":t["best_for"]}, lastmod=t["pricing_checked"])
 TIERS = [("Basic listing (claim & update your info)", "Free", "check", ""), ("Featured in one vertical (top of vertical page + card badge)", "$49/mo", "megaphone", ""), ("Homepage feature", "$149/mo", "general-assistant", " hot")]
 write("/advertise/", f"Advertise on {SITE} — Sponsored Listings", "Reach contractors, realtors and salon owners shopping for AI tools. Featured vertical and homepage placements, plus free claimable listings.",
  page_hero("megaphone", "Sponsored listings", f"Advertise on {SITE}", f'Draft pricing — all paid placements are clearly labeled <span class="sp">{icon("shield")}Sponsored</span>.', crumb=crumbs(("Advertise", None))) +
  f'''<div class="wrap"><div class="tiers" role="table" aria-label="Placement pricing"><div class="sr" role="row"><span role="columnheader">Placement</span><span role="columnheader">Price</span></div>{"".join(f'<div class="tier{hot}" role="row"><span class="ico">{icon(ic)}</span><p class="tier-price" role="cell">{pr}</p><p class="tier-name" role="cell">{n}</p></div>' for n,pr,ic,hot in TIERS)}</div>
 <div class="panel center"><p>{icon("shield")}Sponsorship never changes our "best for" notes or pricing info.</p><p><a class="btn" href="mailto:{EMAIL}?subject=Advertise%20on%20{SITE}">Email us to advertise{icon("arrow")}</a></p></div></div>''')
-open(f"{OUT}/sitemap.xml","w").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+"".join(f"<url><loc>{u}</loc></url>" for u in pages)+"</urlset>\n")
+longtail.emit(plan, {"write": write, "e": e, "link": link, "icon": icon, "card": card, "page_hero": page_hero, "crumbs": crumbs, "itemlist": itemlist, "price_label": price_label, "SP": SP, "abs_url": lambda path: BASE + PATH_PREFIX + path})
+def xml_text(s): return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+open(f"{OUT}/sitemap.xml","w").write('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'+"".join(f"<url><loc>{xml_text(u)}</loc><lastmod>{lm}</lastmod></url>" for u, lm in pages)+"</urlset>\n")
 open(f"{OUT}/robots.txt","w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}{PATH_PREFIX}/sitemap.xml\n")
 print(f"Built {len(pages)} pages for {len(tools)} tools -> {OUT}/ (BASE={BASE}{PATH_PREFIX})")
+print("LONGTAIL_REPORT")
+print(json.dumps(plan["report"], indent=2))
