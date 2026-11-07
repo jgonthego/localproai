@@ -284,3 +284,20 @@ small{color:var(--faint)}
   .slot{padding:.9rem}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* long-tail guides */
+.guides-home{display:flex;justify-content:center;margin:1.5rem 0 0}
+.guides-home a{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;text-decoration:none;color:var(--text);background:color-mix(in srgb,var(--surface) 82%,transparent);border:1px solid var(--line);border-radius:999px;padding:.6rem 1rem;box-shadow:var(--shadow)}
+.guides-home a:hover{border-color:color-mix(in srgb,var(--brand) 45%,transparent);color:var(--text)}
+.guides-home small{font-weight:600;color:var(--faint)}
+.prose{max-width:68ch;color:var(--muted);margin:0 0 1rem}
+.prose p{margin:.35rem 0 .8rem}
+.prose strong{color:var(--text)}
+.stack{display:grid;gap:.8rem;margin:0 0 1.2rem}
+.quote-list{list-style:none;padding:0;margin:0 0 1.2rem;display:grid;gap:.6rem}
+.quote-list li{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-sm);padding:.85rem 1rem;box-shadow:var(--shadow)}
+.quote-list q{display:block;margin-top:.25rem;color:var(--muted)}
+.calc-row{display:grid;gap:.35rem;font-weight:650;margin:0 0 .85rem}
+.calc-row select{font:inherit;font-weight:550;color:var(--text);background:var(--surface);border:1px solid var(--line2);border-radius:12px;padding:.75rem .9rem;width:100%}
+.calc-actions{margin:1rem 0 1.2rem}
+#calc-out{margin:0 0 1.6rem}
